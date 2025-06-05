@@ -1,71 +1,71 @@
-  # **Teste para Desenvolvedor: API de Cadastro de Clientes com Validação de CEP**
+# Projeto Laravel - Gestão de Clientes
 
-O objetivo deste teste é desenvolver uma **API Rest** para o cadastro de clientes, garantindo que o cliente esteja em um CEP valido.
+## Descrição
 
----
+API RESTful para gerenciamento de clientes e seus endereços, construída com Laravel.  
+Implementa repositórios para organização da lógica de persistência, validação customizada e filtros para consultas.
 
-## **Descrição do Projeto**
+## Tecnologias
 
-### **Backend (API Laravel)**
+-   PHP 8.x
+-   Laravel 10
+-   MySQL
+-   Docker
 
-#### **Cadastro de Clientes**
-- Criar um cliente com as seguintes informações:
-  - Nome completo
-  - CPF (validado, único no banco)
-  - E-mail (validado, único no banco)
-  - Telefone
-  - CEP 
-  - Endereço (logradouro, bairro, cidade, estado)
+## Estrutura do Projeto
 
-- Editar um cliente
-- Excluir um cliente
-- Listar clientes (paginação, filtro por nome, CPF e CEP)
+-   **app/Filters**: Classes para filtros de pesquisa na listagem de clientes.
+-   **app/Helpers**: Helpers para formatação de campos como CEP, telefone e CPF.
+-   **app/Rules**: Regras customizadas para validação de CPF e telefone.
+-   **app/Services**: Serviços para lógica de negócio.
+-   **app/Repositories**: Repositórios para abstração da camada de acesso a dados.
+-   **app/Http/Requests**: Requests para validação das entradas.
+-   **database/seeders**: Seeds para popular dados iniciais.
 
----
+## Como rodar o projeto com Docker
 
-### **Migrations**
-- Utilize migrations do Laravel para definir a estrutura do banco de dados, garantindo uma boa organização e facilidade de manutenção.
+1. Clone o repositório.
+2. Execute o comando para subir os containers com Docker Compose:
+    ```
+    docker-compose up -d --build
+    ```
+3. Acesse o container da aplicação:
+    ```
+    docker-compose exec app bash
+    ```
+4. Instale as dependências
+    ```
+    composer install
+    ```
+5. Crie o arquivo .env a partir do .env.example
+    ```
+    cp .env.example .env
+    ```
+6. Gere uma nova chave de aplicação:
+    ```
+    php artisan key:generate
+    ```
+7. Execute as migrations:
+    ```
+    php artisan migrate
+    ```
+8. Rode as seeds para popular o banco:
+    ```
+    php artisan db:seed
+    ```
 
----
+## Endpoints principais
 
-### **Requisitos**
-- **Validar CPF** (formato correto e não permitir duplicação).
-- **Validar e-mail** (formato correto e não permitir duplicação).
-- **Validar endereço automaticamente** via [BrasilAPI](https://brasilapi.com.br/docs#tag/CEP-V2) ou qualquer outro endpoint público ao inserir ou atualizar um cliente.
+-   `GET /api/customers` - Listar clientes com filtros.
+-   `POST /api/customers` - Criar novo cliente.
+-   `PUT/PATCH /api/customers/{id_customer}` - Atualizar cliente.
+-   `GET /api/customers/{id_customer}` - Detalhes do cliente.
 
+## Cache
 
----
+- Endpoints `GET /api/customers` e `GET /api/customers/{id_customer}` utilizam cache com Redis para melhorar performance.
+- Cache é limpo automaticamente ao criar, atualizar ou deletar clientes para evitar dados desatualizados.
 
-## **Critérios de Avaliação**
-- **Adesão aos requisitos funcionais e técnicos**
-- **Qualidade do código** (organização, padrões, segurança)
-- **Uso adequado do Laravel (migrations, Eloquent, validações, etc.)**
-- **README bem estruturado** com instruções de instalação e uso
+## Contato
 
----
-
-## **Tecnologias a serem utilizadas**
-- **PHP 8.x**
-- **Laravel 10.x**
-- **Banco de Dados**: MySQL ou PostgreSQL
-
----
-
-## **Extra**
-- Implementação do **Repository Pattern**  
-- **Testes automatizados** (unitários ou de integração)  
-- **Dockerização** do ambiente para facilitar a instalação  
-- **Implementação de cache** para otimizar o desempenho 
-
----
-
-## **Entrega**
-1. Faça um **fork** deste repositório.
-2. Crie uma **branch** com o seu nome.
-3. Altere o **README.md** com as instruções para rodar o projeto (comandos necessários, migrations, seeds, etc.).
-4. Após finalizar, envie um **pull request** para avaliação.
-
----
-
-
-Boa sorte! 🚀
+Desenvolvido por Guilherme Viana.

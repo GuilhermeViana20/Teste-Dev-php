@@ -1,0 +1,14 @@
+.git
+.github
+.editorconfig
+.env
+.phpunit.result.cache
+node_modules
+vendor
+public/build
+storage/framework/sessions/*
+storage/framework/cache/data/*
+storage/logs/*.log
+docker-compose.yml
+Dockerfile
+README.md
